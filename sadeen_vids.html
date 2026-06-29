@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sadeen - Videos 🌸</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dms.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    <video id="wallpaper-video" class="wallpaper-video" autoplay loop muted playsinline></video>
+
+    <main id="story-container" class="glass-panel ig-panel sadeen-theme-ig">
+        <div class="ig-nav">
+            <button id="back-to-choices-btn" class="ig-icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <h2 id="story-title" class="ig-username">sadeen 🌸</h2>
+            <button id="edit-bio-btn" class="ig-icon-btn hidden">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="ig-bio" style="margin-top: 1rem;">
+            <div id="ig-fullname" class="ig-fullname">Full Name</div>
+            <div id="bio-text" class="ig-bio-text"></div>
+        </div>
+
+        <div class="ig-tabs">
+            <div class="ig-tab" id="tab-stories">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+            </div>
+            <div class="ig-tab active" id="tab-videos">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+                    <line x1="7" y1="2" x2="7" y2="22" />
+                    <line x1="17" y1="2" x2="17" y2="22" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <line x1="2" y1="7" x2="7" y2="7" />
+                    <line x1="2" y1="17" x2="7" y2="17" />
+                    <line x1="17" y1="17" x2="22" y2="17" />
+                    <line x1="17" y1="7" x2="22" y2="7" />
+                </svg>
+            </div>
+            <div class="ig-tab" id="tab-questions">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+            </div>
+        </div>
+
+        <div id="ig-grid-container" class="ig-grid">
+            <div class="ig-grid-item add-story-item" id="add-post-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="32" height="32">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                <span>Add Video</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="add-story-modal" class="modal-overlay hidden">
+        <div class="glass-panel modal-panel">
+            <h2>Post Reel 🌸</h2>
+            <div class="modal-section-v">
+                <label class="edit-label">Title</label>
+                <input type="text" id="story-title-input" class="edit-input">
+            </div>
+            <div class="modal-section-v" id="text-content-section">
+                <label class="edit-label">Description</label>
+                <textarea id="story-content-input" rows="8" class="edit-input"></textarea>
+            </div>
+            <div id="video-upload-section" class="modal-section-v hidden">
+                <label class="edit-label">Upload Video 🎬</label>
+                <input type="file" id="story-video-file" accept="video/*" class="file-input-hidden">
+                <label for="story-video-file" class="upload-btn">Select Video...</label>
+                <span id="video-name-display">No video selected</span>
+            </div>
+            <div class="modal-actions">
+                <button id="save-story-btn" class="primary-btn">Post Video 🌸</button>
+                <button id="cancel-story-btn" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reader Modal -->
+    <div id="story-reader-modal" class="modal-overlay hidden">
+        <div class="glass-panel modal-panel reader-panel">
+            <div class="reader-layout">
+                <div class="reader-media-col">
+                    <div id="video-container" class="hidden media-box">
+                        <video id="player-video" controls autoplay loop
+                            style="width: 100%; height: 100%; object-fit: contain;"></video>
+                    </div>
+                    <div id="text-display" class="text-display">
+                        <div class="text-display-author">
+                            <div class="td-avatar" id="td-avatar" style="background:#ff69b4;">D</div>
+                            <span class="td-name" id="td-name">sadeen 🌸</span>
+                            <span class="td-date" id="td-date">Just now</span>
+                        </div>
+                        <h2 class="text-display-title" id="td-title"></h2>
+                        <div class="text-display-content" id="td-content"></div>
+                    </div>
+                </div>
+                <div class="reader-info-col">
+                    <div class="reader-header">
+                        <div class="reader-author">
+                            <div class="author-avatar" id="reader-avatar" style="background: #ff69b4;">D</div>
+                            <div class="author-details">
+                                <strong id="reader-author-name">sadeen 🌸</strong>
+                                <span id="reader-post-date">Just now</span>
+                            </div>
+                        </div>
+                        <button id="close-reader-btn" class="close-icon-btn">X</button>
+                    </div>
+                    <div id="comments-list" class="comments-list">
+                        <div id="reader-caption-box" class="reader-caption">
+                            <h2 id="reader-title"></h2>
+                            <div id="reader-content"></div>
+                        </div>
+                        <div id="actual-comments" style="margin-top: 1.5rem;"></div>
+                    </div>
+                    <div class="reader-actions">Likes, etc.</div>
+                    <div class="comment-input-area">
+                        <textarea id="comment-input" class="comment-textarea"></textarea>
+                        <button id="post-comment-btn" class="comment-post-btn">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal-overlay hidden">
+        <div class="glass-panel modal-panel">
+            <h2>Settings 🌸</h2>
+            <div class="modal-section-v">
+                <label class="edit-label">Name</label>
+                <input type="text" id="edit-name" class="edit-input">
+            </div>
+            <div class="modal-section-v">
+                <label class="edit-label">Bio</label>
+                <textarea id="bio-editor" rows="4" class="edit-input"></textarea>
+            </div>
+            <div class="modal-section-v">
+                <label class="edit-label">Wallpaper</label>
+                <div class="file-upload-wrapper">
+                    <input type="file" id="edit-wallpaper-file" accept="image/*,video/*" class="file-input-hidden">
+                    <label for="edit-wallpaper-file" class="upload-btn">Upload Photo/Video</label>
+                    <span id="file-name-display" class="file-name-display"></span>
+                </div>
+                <div id="wallpaper-preview-container" class="wallpaper-preview-container hidden">
+                    <img id="wallpaper-preview-img" src="" alt="Wallpaper Preview" class="hidden">
+                    <video id="wallpaper-preview-video" autoplay loop muted playsinline class="hidden" style="width: 100%; border-radius: 12px; margin-top: 10px;"></video>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="save-bio-btn" class="primary-btn">Save 🌸</button>
+                <button id="cancel-bio-btn" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.CURRENT_STORY_ID = 'sadeen';
+        window.OWNER_ACCOUNTS = ['sadeen', 'sadeen'];
+        window.CURRENT_CATEGORY = 'video';
+    </script>
+    <script src="story.js"></script>
+    <script src="dms.js"></script>
+</body>
+
+</html>

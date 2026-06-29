@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Story Portal - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Login Container -->
+    <main id="login-container" class="glass-panel active">
+        <div class="logo-area">
+            <h1>Welcome Back</h1>
+            <p>Enter your credentials to continue</p>
+        </div>
+        <form id="login-form">
+            <div class="input-group">
+                <input type="text" id="username" autocomplete="off" required>
+                <label for="username">Username</label>
+                <div class="glow-line"></div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" required>
+                <label for="password">Password</label>
+                <div class="glow-line"></div>
+            </div>
+            <p id="error-message" class="error-text">Invalid credentials. Please try again.</p>
+            <button type="submit" class="primary-btn">
+                <span>Access Portal</span>
+                <div class="btn-glow"></div>
+            </button>
+        </form>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

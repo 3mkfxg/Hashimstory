@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Story Portal - Choice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dms.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Choice Container -->
+    <main id="choice-container" class="glass-panel active">
+        <div class="header-area">
+            <h2>Select Your Path</h2>
+            <p>Choose whose story you want to explore</p>
+        </div>
+        <div class="cards-wrapper">
+            <div class="story-card sadness-theme" id="card-hashim">
+                <div class="card-content">
+                    <h3>Hashim's</h3>
+                    <span class="subtitle">💔 Story</span>
+                </div>
+                <div class="card-bg card-bg-sadness"></div>
+                <div class="rain-drops">
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+            <div class="story-card girly-theme" id="card-sadeen">
+                <div class="card-content">
+                    <h3>sadeen'S</h3>
+                    <span class="subtitle">STORY 🌸</span>
+                </div>
+                <div class="card-bg card-bg-2"></div>
+                <div class="floating-hearts">💖✨💕</div>
+            </div>
+        </div>
+        <button id="logout-btn" class="secondary-btn">Sign Out</button>
+    </main>
+
+    <script src="choices.js"></script>
+    <script src="dms.js"></script>
+</body>
+</html>
